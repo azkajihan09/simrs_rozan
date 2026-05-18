@@ -112,7 +112,7 @@ class Farmasi extends CI_Controller {
 
     ->join(
         'pasien',
-        'pasien.id=resep.pasien_id'
+        'pasien.id_pasien=resep.pasien_id'
     )
 
     ->join(
@@ -288,7 +288,7 @@ public function detail_resep($id)
 
     ->join(
         'pasien',
-        'pasien.id=resep.pasien_id'
+        'pasien.id_pasien=resep.pasien_id'
     )
 
     ->join(

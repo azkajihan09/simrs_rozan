@@ -4,7 +4,10 @@ function cek_login()
 {
     $CI =& get_instance();
 
-    if(!$CI->session->userdata('login')){
+    if(
+        !$CI->session->userdata('login') &&
+        !$CI->session->userdata('logged_in')
+    ){
 
         redirect('auth');
     }

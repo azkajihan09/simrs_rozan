@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller {
     ->row();
 
     $data['billing_hari_ini'] =
-        $billing->total_bayar ?? 0;
+        isset($billing->total_bayar) ? $billing->total_bayar : 0;
 
     /*
     |--------------------------------------------------------------------------

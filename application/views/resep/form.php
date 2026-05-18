@@ -62,7 +62,7 @@ Form Resep Obat
 
 <input type="text"
        class="form-control"
-       value="<?= $rekam_medis->nama_pasien ?? '-' ?>"
+       value="<?= (isset($rekam_medis->nama_pasien) ? $rekam_medis->nama_pasien : '-' ?>")
        readonly>
 
 </div>
@@ -77,7 +77,7 @@ Form Resep Obat
 
 <input type="text"
        class="form-control"
-       value="<?= $rekam_medis->no_rm ?? '-' ?>"
+       value="<?= (isset($rekam_medis->no_rm) ? $rekam_medis->no_rm : '-' ?>")
        readonly>
 
 </div>

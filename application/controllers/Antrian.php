@@ -122,7 +122,7 @@ class Antrian extends CI_Controller {
 
     ->join(
         'pasien',
-        'pasien.id=antrian.pasien_id'
+        'pasien.id_pasien=antrian.pasien_id'
     )
 
     ->join(

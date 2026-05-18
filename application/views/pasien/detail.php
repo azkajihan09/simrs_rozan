@@ -77,7 +77,8 @@
 
                                     <td>
 
-                                        <?= $pasien->no_rm ?? '-' ?>
+                                        <?= (isset($pasien->no_rm) ? $pasien->no_rm : '-' ?>
+)
 
                                     </td>
 
@@ -93,7 +94,8 @@
 
                                     <td>
 
-                                        <?= $pasien->nik ?? '-' ?>
+                                        <?= (isset($pasien->nik) ? $pasien->nik : '-' ?>
+)
 
                                     </td>
 
@@ -111,7 +113,8 @@
 
                                         <strong>
 
-                                            <?= $pasien->nama_pasien ?? '-' ?>
+                                            <?= (isset($pasien->nama_pasien) ? $pasien->nama_pasien : '-' ?>
+)
 
                                         </strong>
 
@@ -131,10 +134,7 @@
 
         <?php
 
-            $jk = $pasien->jenis_kelamin
-                ?? $pasien->jk
-                ?? $pasien->gender
-                ?? null;
+            $jk = isset($pasien->jenis_kelamin) ? $pasien->jenis_kelamin : (isset($pasien->jk) ? $pasien->jk : (isset($pasien->gender) ? $pasien->gender : null));
 
             if($jk == 'L'){
                 echo 'Laki-laki';
@@ -162,7 +162,8 @@
 
                                     <td>
 
-                                        <?= $pasien->telepon ?? '-' ?>
+                                        <?= (isset($pasien->telepon) ? $pasien->telepon : '-' ?>
+)
 
                                     </td>
 
@@ -178,7 +179,8 @@
 
                                     <td>
 
-                                        <?= $pasien->alamat ?? '-' ?>
+                                        <?= (isset($pasien->alamat) ? $pasien->alamat : '-' ?>
+)
 
                                     </td>
 

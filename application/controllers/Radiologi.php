@@ -36,7 +36,7 @@ class Radiologi extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=radiologi.pasien_id'
+            'pasien.id_pasien=radiologi.pasien_id'
         )
 
         ->join(
@@ -82,7 +82,7 @@ class Radiologi extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=rekam_medis.pasien_id'
+            'pasien.id_pasien=rekam_medis.pasien_id'
         )
 
         ->join(
@@ -182,7 +182,7 @@ class Radiologi extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=radiologi.pasien_id'
+            'pasien.id_pasien=radiologi.pasien_id'
         )
 
         ->join(
@@ -294,7 +294,7 @@ class Radiologi extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=radiologi.pasien_id'
+            'pasien.id_pasien=radiologi.pasien_id'
         )
 
         ->join(

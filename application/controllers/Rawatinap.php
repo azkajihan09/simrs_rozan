@@ -34,7 +34,7 @@ class Rawatinap extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=rawat_inap.pasien_id'
+            'pasien.id_pasien=rawat_inap.pasien_id'
         )
 
         ->join(
@@ -232,7 +232,7 @@ class Rawatinap extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=rawat_inap.pasien_id'
+            'pasien.id_pasien=rawat_inap.pasien_id'
         )
 
         ->join(

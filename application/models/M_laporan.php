@@ -70,7 +70,7 @@ class M_laporan extends CI_Model {
             ->get('billing')
             ->row();
 
-        return $query->total_bayar ?? 0;
+        return isset($query->total_bayar) ? $query->total_bayar : 0;
     }
 
     /*

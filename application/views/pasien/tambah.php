@@ -74,7 +74,7 @@
                                     <input type="text"
                                            name="no_rm"
                                            class="form-control"
-                                           value="<?= $kode_rm ?? '' ?>"
+                                           value="<?= (isset($kode_rm) ? $kode_rm : '' ?>")
                                            readonly>
 
                                 </div>

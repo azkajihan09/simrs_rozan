@@ -68,7 +68,7 @@
 <textarea
 name="keluhan"
 class="form-control"
-rows="3"><?= $rekam_medis->keluhan ?? '' ?></textarea>
+rows="3"><?= (isset($rekam_medis->keluhan) ? $rekam_medis->keluhan : '' ?></textarea>)
 
 </div>
 
@@ -83,7 +83,7 @@ rows="3"><?= $rekam_medis->keluhan ?? '' ?></textarea>
 <textarea
 name="anamnesa"
 class="form-control"
-rows="3"><?= $rekam_medis->anamnesa ?? '' ?></textarea>
+rows="3"><?= (isset($rekam_medis->anamnesa) ? $rekam_medis->anamnesa : '' ?></textarea>)
 
 </div>
 
@@ -98,7 +98,7 @@ rows="3"><?= $rekam_medis->anamnesa ?? '' ?></textarea>
 <textarea
 name="diagnosa"
 class="form-control"
-rows="3"><?= $rekam_medis->diagnosa ?? '' ?></textarea>
+rows="3"><?= (isset($rekam_medis->diagnosa) ? $rekam_medis->diagnosa : '' ?></textarea>)
 
 </div>
 
@@ -113,7 +113,7 @@ rows="3"><?= $rekam_medis->diagnosa ?? '' ?></textarea>
 <textarea
 name="tindakan"
 class="form-control"
-rows="3"><?= $rekam_medis->tindakan ?? '' ?></textarea>
+rows="3"><?= (isset($rekam_medis->tindakan) ? $rekam_medis->tindakan : '' ?></textarea>)
 
 </div>
 
@@ -151,7 +151,7 @@ multiple>
 <textarea
 name="catatan"
 class="form-control"
-rows="3"><?= $rekam_medis->catatan ?? '' ?></textarea>
+rows="3"><?= (isset($rekam_medis->catatan) ? $rekam_medis->catatan : '' ?></textarea>)
 
 </div>
 

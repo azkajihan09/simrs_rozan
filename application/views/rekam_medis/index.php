@@ -125,7 +125,7 @@
 
                                         <span class="badge badge-info p-2">
 
-                                            <?= $row->no_rm ?? '-' ?>
+                                            <?= (isset($row->no_rm) ? $row->no_rm : '-' ?>)
 
                                         </span>
 
@@ -135,7 +135,7 @@
 
                                         <strong>
 
-                                            <?= $row->nama_pasien ?? '-' ?>
+                                            <?= (isset($row->nama_pasien) ? $row->nama_pasien : '-' ?>)
 
                                         </strong>
 
@@ -143,19 +143,19 @@
 
                                     <td>
 
-                                        <?= $row->nama_poli ?? '-' ?>
+                                        <?= (isset($row->nama_poli) ? $row->nama_poli : '-' ?>)
 
                                     </td>
 
                                     <td>
 
-                                        <?= $row->nama_dokter ?? '-' ?>
+                                        <?= (isset($row->nama_dokter) ? $row->nama_dokter : '-' ?>)
 
                                     </td>
 
                                     <td>
 
-                                        <?= $row->diagnosa ?? '-' ?>
+                                        <?= (isset($row->diagnosa) ? $row->diagnosa : '-' ?>)
 
                                     </td>
 

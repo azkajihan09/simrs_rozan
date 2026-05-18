@@ -24,7 +24,7 @@ class Laboratorium extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=laboratorium.pasien_id'
+            'pasien.id_pasien=laboratorium.pasien_id'
         )
 
         ->join(
@@ -60,7 +60,7 @@ class Laboratorium extends CI_Controller {
 
         ->join(
             'pasien',
-            'pasien.id=rekam_medis.pasien_id'
+            'pasien.id_pasien=rekam_medis.pasien_id'
         )
 
         ->get()
