@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login SIMRS</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+<style>
+body{
+    background: linear-gradient(to right,#36d1dc,#5b86e5);
+}
+
+.login-box{
+    margin-top:120px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="login-box mx-auto">
+
+<div class="card shadow-lg">
+
+<div class="card-body login-card-body">
+
+<h3 class="text-center mb-4">
+SIMRS Klinik Rozan
+</h3>
+
+<form action="<?= base_url('auth/login')?>" method="POST">
+
+<div class="form-group">
+<input type="text" name="username" class="form-control" placeholder="Username">
+</div>
+
+<div class="form-group">
+<input type="password" name="password" class="form-control" placeholder="Password">
+</div>
+
+<button class="btn btn-primary btn-block">
+Login
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
