@@ -8,14 +8,6 @@ class Auth extends CI_Controller {
     
     {
         parent::__construct();
-                cek_hak_akses([
-    'super_admin',
-    'admin',
-    'kasir',
-    'dokter',
-    'farmasi',
-    'keuangan'
-]);
         $this->load->model('M_auth');
         
         
