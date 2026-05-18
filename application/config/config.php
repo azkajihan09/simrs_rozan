@@ -23,8 +23,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// $config['base_url'] = 'http://localhost/simrs_rozan/';
-$config['base_url'] = 'http://localhost:8080/simrs_rozan/';
+// Auto-detect host/scheme so localhost and temporary tunnel domains both work.
+if (PHP_SAPI === 'cli') {
+	$config['base_url'] = 'http://localhost:8080/simrs_rozan/';
+} else {
+	$forwardedProto = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? strtolower(trim(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'])[0])) : '';
+	$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $forwardedProto === 'https';
+	$scheme = $isHttps ? 'https' : 'http';
+
+	$forwardedHost = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? trim(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])[0]) : '';
+	$host = $forwardedHost !== '' ? $forwardedHost : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost:8080');
+
+	$scriptPath = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
+	$requestPath = isset($_SERVER['REQUEST_URI']) ? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : '';
+	$appPath = '/simrs_rozan';
+
+	if (!empty($requestPath) && preg_match('#^/simrs_rozan(?:/|$)#', $requestPath)) {
+		$appPath = '/simrs_rozan';
+	} elseif (!empty($scriptPath) && $scriptPath !== '/' && $scriptPath !== '.') {
+		$appPath = '/' . trim($scriptPath, '/');
+	}
+
+	$config['base_url'] = $scheme . '://' . $host . rtrim($appPath, '/') . '/';
+}
 
 /*
 |--------------------------------------------------------------------------
