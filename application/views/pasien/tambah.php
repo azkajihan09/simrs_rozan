@@ -25,7 +25,7 @@
                 <div class="col-sm-6 text-right">
 
                     <a href="<?= base_url('pasien') ?>"
-                       class="btn btn-secondary">
+                        class="btn btn-secondary">
 
                         <i class="fas fa-arrow-left"></i>
                         Kembali
@@ -58,7 +58,7 @@
                 </div>
 
                 <form method="post"
-                      action="<?= base_url('pasien/simpan') ?>">
+                    action="<?= base_url('pasien/simpan') ?>">
 
                     <div class="card-body">
 
@@ -72,10 +72,10 @@
                                     <label>No RM</label>
 
                                     <input type="text"
-                                           name="no_rm"
-                                           class="form-control"
-                                           value="<?= (isset($kode_rm) ? $kode_rm : '' ?>")
-                                           readonly>
+                                        name="no_rm"
+                                        class="form-control"
+                                        value="<?= isset($kode_rm) ? $kode_rm : '' ?>"
+                                        readonly>
 
                                 </div>
 
@@ -89,9 +89,9 @@
                                     <label>NIK</label>
 
                                     <input type="text"
-                                           name="nik"
-                                           class="form-control"
-                                           required>
+                                        name="nik"
+                                        class="form-control"
+                                        required>
 
                                 </div>
 
@@ -105,9 +105,9 @@
                                     <label>Nama Pasien</label>
 
                                     <input type="text"
-                                           name="nama_pasien"
-                                           class="form-control"
-                                           required>
+                                        name="nama_pasien"
+                                        class="form-control"
+                                        required>
 
                                 </div>
 
@@ -121,8 +121,8 @@
                                     <label>Jenis Kelamin</label>
 
                                     <select name="jenis_kelamin"
-                                            class="form-control"
-                                            required>
+                                        class="form-control"
+                                        required>
 
                                         <option value="">
                                             -- Pilih --
@@ -150,8 +150,8 @@
                                     <label>Tanggal Lahir</label>
 
                                     <input type="date"
-                                           name="tanggal_lahir"
-                                           class="form-control">
+                                        name="tanggal_lahir"
+                                        class="form-control">
 
                                 </div>
 
@@ -165,8 +165,8 @@
                                     <label>Telepon</label>
 
                                     <input type="text"
-                                           name="telepon"
-                                           class="form-control">
+                                        name="telepon"
+                                        class="form-control">
 
                                 </div>
 
@@ -180,8 +180,8 @@
                                     <label>Alamat</label>
 
                                     <textarea name="alamat"
-                                              rows="4"
-                                              class="form-control"></textarea>
+                                        rows="4"
+                                        class="form-control"></textarea>
 
                                 </div>
 
@@ -194,7 +194,7 @@
                     <div class="card-footer">
 
                         <button type="submit"
-                                class="btn btn-primary btn-submit">
+                            class="btn btn-primary btn-submit">
 
                             <i class="fas fa-save"></i>
                             Simpan Pasien
@@ -202,7 +202,7 @@
                         </button>
 
                         <a href="<?= base_url('pasien') ?>"
-                           class="btn btn-secondary">
+                            class="btn btn-secondary">
 
                             <i class="fas fa-times"></i>
                             Batal
@@ -225,17 +225,15 @@
 <?php $this->load->view('template/script'); ?>
 
 <script>
+    $('form').submit(function() {
 
-$('form').submit(function(){
+        $('.btn-submit').prop('disabled', true);
 
-    $('.btn-submit').prop('disabled', true);
+        $('.btn-submit').html(
 
-    $('.btn-submit').html(
+            '<i class="fas fa-spinner fa-spin"></i> Menyimpan...'
 
-        '<i class="fas fa-spinner fa-spin"></i> Menyimpan...'
+        );
 
-    );
-
-});
-
+    });
 </script>

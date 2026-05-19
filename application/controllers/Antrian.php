@@ -1,50 +1,23 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Antrian extends CI_Controller {
+class Antrian extends CI_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
+
+        cek_login();
 
         $this->load->model('M_antrian');
     }
 
     public function index()
     {
-        $data['antrian'] = $this->db
+        $data['antrian'] = $this->M_antrian->get_all();
 
-    ->select('
-
-        antrian.*,
-
-        pasien.nama_pasien,
-
-        dokter.nama_dokter
-
-    ')
-
-    ->from('antrian')
-
-    ->join(
-        'pasien',
-        'pasien.id_pasien = antrian.pasien_id',
-        'left'
-    )
-
-    ->join(
-        'dokter',
-        'dokter.id = antrian.dokter_id',
-        'left'
-    )
-
-    ->order_by('antrian.id','DESC')
-
-    ->get()
-
-    ->result();
-
-        $this->load->view('antrian/index',$data);
+        $this->load->view('antrian/index', $data);
     }
 
     public function tambah()
@@ -53,7 +26,7 @@ class Antrian extends CI_Controller {
 
         $data = [
 
-            'kode_antrian' => 'A'.$nomor,
+            'kode_antrian' => 'A' . $nomor,
 
             'pasien_id' => $this->input->post('pasien_id'),
 
@@ -73,9 +46,9 @@ class Antrian extends CI_Controller {
 
     public function panggil($id)
     {
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
 
-        $this->db->update('antrian',[
+        $this->db->update('antrian', [
 
             'status' => 'DIPANGGIL',
 
@@ -87,9 +60,9 @@ class Antrian extends CI_Controller {
 
     public function selesai($id)
     {
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
 
-        $this->db->update('antrian',[
+        $this->db->update('antrian', [
 
             'status' => 'SELESAI'
         ]);
@@ -99,9 +72,9 @@ class Antrian extends CI_Controller {
 
     public function batal($id)
     {
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
 
-        $this->db->update('antrian',[
+        $this->db->update('antrian', [
 
             'status' => 'BATAL'
         ]);
@@ -109,36 +82,12 @@ class Antrian extends CI_Controller {
         redirect('antrian');
     }
     public function cetak($id)
-{
-    $data['antrian'] = $this->db
+    {
+        $data['antrian'] = $this->M_antrian->detail($id);
 
-    ->select('
-        antrian.*,
-        pasien.nama_pasien,
-        dokter.nama_dokter
-    ')
-
-    ->from('antrian')
-
-    ->join(
-        'pasien',
-        'pasien.id_pasien=antrian.pasien_id'
-    )
-
-    ->join(
-        'dokter',
-        'dokter.id=antrian.dokter_id'
-    )
-
-    ->where('antrian.id',$id)
-
-    ->get()
-
-    ->row();
-
-    $this->load->view(
-        'antrian/cetak',
-        $data
-    );
-}
+        $this->load->view(
+            'antrian/cetak',
+            $data
+        );
+    }
 }

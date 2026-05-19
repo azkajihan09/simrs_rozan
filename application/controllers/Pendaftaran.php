@@ -1,13 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pendaftaran extends CI_Controller {
+class Pendaftaran extends CI_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
 
-        //cek_login();
+        cek_login();
 
         $this->load->model('M_pendaftaran');
     }
@@ -22,7 +23,7 @@ class Pendaftaran extends CI_Controller {
     {
         $data['pendaftaran'] = $this->M_pendaftaran->get_all();
 
-        $this->load->view('pendaftaran/index',$data);
+        $this->load->view('pendaftaran/index', $data);
     }
 
     /*
@@ -34,67 +35,65 @@ class Pendaftaran extends CI_Controller {
     public function tambah()
     {
         $data['pasien'] = $this->db
-            ->order_by('nama_pasien','ASC')
+            ->order_by('nama_pasien', 'ASC')
             ->get('pasien')
             ->result();
 
         $data['poli'] = $this->db
-            ->order_by('nama_poli','ASC')
+            ->order_by('nama_poli', 'ASC')
             ->get('poliklinik')
             ->result();
 
-            $data['dokter'] = $this->db
-    ->order_by('nama_dokter','ASC')
-    ->get('dokter')
-    ->result();
+        $data['dokter'] = $this->db
+            ->order_by('nama_dokter', 'ASC')
+            ->get('dokter')
+            ->result();
 
-        if($this->input->post()){
+        if ($this->input->post()) {
 
             $poli_id = $this->input->post('poli_id');
 
             $no_antrian = $this->M_pendaftaran
                 ->generate_nomor_antrian($poli_id);
 
-           $simpan = [
+            $simpan = [
 
-    'tanggal' => date('Y-m-d'),
+                'tanggal' => date('Y-m-d'),
 
-    'pasien_id' => $this->input->post('pasien_id'),
+                'pasien_id' => $this->input->post('pasien_id'),
 
-    'dokter_id' => $this->input->post('dokter_id'),
+                'dokter_id' => $this->input->post('dokter_id'),
 
-    'poli_id' => $poli_id,
+                'poli_id' => $poli_id,
 
-    'jenis_pasien' => $this->input->post('jenis_pasien'),
+                'jenis_pasien' => $this->input->post('jenis_pasien'),
 
-    'status' => 'MENUNGGU',
+                'status' => 'MENUNGGU',
 
-    'no_antrian' => $no_antrian
+                'no_antrian' => $no_antrian
 
-];
+            ];
 
             $save = $this->M_pendaftaran->simpan($simpan);
 
-            if($save){
+            if ($save) {
 
                 $this->session->set_flashdata(
                     'success',
                     'Pendaftaran berhasil'
                 );
-
             } else {
 
                 $this->session->set_flashdata(
                     'error',
                     'Pendaftaran gagal'
                 );
-
             }
 
             redirect('pendaftaran');
         }
 
-        $this->load->view('pendaftaran/tambah',$data);
+        $this->load->view('pendaftaran/tambah', $data);
     }
 
     /*
@@ -104,11 +103,11 @@ class Pendaftaran extends CI_Controller {
     */
 
     public function detail($id)
-{
+    {
 
-    $data['detail'] = $this->db
+        $data['detail'] = $this->db
 
-        ->select('
+            ->select('
 
             pendaftaran.*,
 
@@ -124,41 +123,40 @@ class Pendaftaran extends CI_Controller {
 
         ')
 
-        ->from('pendaftaran')
+            ->from('pendaftaran')
 
-        ->join(
-            'pasien',
-            'pasien.id_pasien = pendaftaran.pasien_id',
-            'left'
-        )
+            ->join(
+                'pasien',
+                'pasien.id_pasien = pendaftaran.pasien_id',
+                'left'
+            )
 
-        ->join(
-            'dokter',
-            'dokter.id = pendaftaran.dokter_id',
-            'left'
-        )
+            ->join(
+                'dokter',
+                'dokter.id = pendaftaran.dokter_id',
+                'left'
+            )
 
-        ->join(
-            'poliklinik',
-            'poliklinik.id = pendaftaran.poli_id',
-            'left'
-        )
+            ->join(
+                'poliklinik',
+                'poliklinik.id = pendaftaran.poli_id',
+                'left'
+            )
 
-        ->where(
-            'pendaftaran.id',
-            $id
-        )
+            ->where(
+                'pendaftaran.id',
+                $id
+            )
 
-        ->get()
+            ->get()
 
-        ->row();
+            ->row();
 
-    $this->load->view(
-        'pendaftaran/detail',
-        $data
-    );
-
-}
+        $this->load->view(
+            'pendaftaran/detail',
+            $data
+        );
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -175,11 +173,11 @@ class Pendaftaran extends CI_Controller {
         $data['poli'] = $this->db->get('poliklinik')->result();
 
         $data['dokter'] = $this->db
-    ->order_by('nama_dokter','ASC')
-    ->get('dokter')
-    ->result();
+            ->order_by('nama_dokter', 'ASC')
+            ->get('dokter')
+            ->result();
 
-        if($this->input->post()){
+        if ($this->input->post()) {
 
             $update = [
 
@@ -195,7 +193,7 @@ class Pendaftaran extends CI_Controller {
 
             ];
 
-            $this->M_pendaftaran->update($id,$update);
+            $this->M_pendaftaran->update($id, $update);
 
             $this->session->set_flashdata(
                 'success',
@@ -205,7 +203,7 @@ class Pendaftaran extends CI_Controller {
             redirect('pendaftaran');
         }
 
-        $this->load->view('pendaftaran/edit',$data);
+        $this->load->view('pendaftaran/edit', $data);
     }
 
     /*
@@ -232,24 +230,21 @@ class Pendaftaran extends CI_Controller {
     |--------------------------------------------------------------------------
     */
 
- public function dokter_by_poli($poli_id)
-{
+    public function dokter_by_poli($poli_id)
+    {
 
-    $dokter = $this->db
+        $dokter = $this->db
 
-        ->where('poli_id', $poli_id)
+            ->where('poli_id', $poli_id)
 
-        ->order_by('nama_dokter', 'ASC')
+            ->order_by('nama_dokter', 'ASC')
 
-        ->get('dokter')
+            ->get('dokter')
 
-        ->result_array();
+            ->result_array();
 
-    header('Content-Type: application/json');
+        header('Content-Type: application/json');
 
-    echo json_encode($dokter);
-
-}
-
-
+        echo json_encode($dokter);
+    }
 }
