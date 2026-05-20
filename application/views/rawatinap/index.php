@@ -2,154 +2,217 @@
 <?php $this->load->view('template/navbar'); ?>
 <?php $this->load->view('template/sidebar'); ?>
 
+<?php
+$total_rawat = is_array($rawat) ? count($rawat) : 0;
+$dirawat = 0;
+$pulang = 0;
+
+foreach ($rawat as $item) {
+    if (strtoupper((string) $item->status) === 'DIRAWAT') {
+        $dirawat++;
+    } else {
+        $pulang++;
+    }
+}
+?>
+
 <div class="content-wrapper p-3">
 
-<div class="card">
+    <section class="content-header">
 
-<div class="card-header">
+        <div class="container-fluid">
 
-<h3 class="card-title">
+            <div class="d-flex justify-content-between align-items-center mb-3">
 
-Data Rawat Inap
+                <h1 class="m-0">
 
-</h3>
+                    <i class="fas fa-bed text-primary"></i>
+                    Rawat Inap
 
-<div class="card-tools">
+                </h1>
 
-<a href="<?= base_url('rawatinap/tambah')?>"
-class="btn btn-primary btn-sm">
+                <a href="<?= base_url('rawatinap/tambah') ?>"
+                    class="btn btn-primary">
 
-Tambah Rawat Inap
+                    <i class="fas fa-plus"></i>
+                    Tambah Rawat Inap
 
-</a>
+                </a>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-<div class="card-body">
+    </section>
 
-<div class="table-responsive">
+    <section class="content">
 
-<table class="table table-bordered table-striped"
-id="tableRawatInap">
+        <div class="container-fluid">
 
-<thead>
+            <div class="row">
 
-<tr>
+                <div class="col-md-4">
 
-<th>No RM</th>
-<th>Pasien</th>
-<th>Dokter</th>
-<th>Kamar</th>
-<th>Bed</th>
-<th>Status</th>
-<th>Tanggal Masuk</th>
-<th>Aksi</th>
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3><?= $total_rawat ?></h3>
+                            <p>Total Data Rawat Inap</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-procedures"></i></div>
+                    </div>
 
-</tr>
+                </div>
 
-</thead>
+                <div class="col-md-4">
 
-<tbody>
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><?= $dirawat ?></h3>
+                            <p>Pasien Masih Dirawat</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-bed"></i></div>
+                    </div>
 
-<?php foreach($rawat as $r): ?>
+                </div>
 
-<tr>
+                <div class="col-md-4">
 
-<td><?= $r->no_rm ?></td>
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3><?= $pulang ?></h3>
+                            <p>Pasien Sudah Pulang</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-home"></i></div>
+                    </div>
 
-<td><?= $r->nama_pasien ?></td>
+                </div>
 
-<td><?= $r->nama_dokter ?></td>
+            </div>
 
-<td><?= $r->nama_kamar ?></td>
+            <div class="card shadow-lg border-0">
 
-<td><?= $r->nomor_bed ?></td>
+                <div class="card-header bg-gradient-primary">
 
-<td>
+                    <h3 class="card-title text-white">
 
-<?php if($r->status=='DIRAWAT'): ?>
+                        Data Rawat Inap
 
-<span class="badge badge-warning">
+                    </h3>
 
-DIRAWAT
+                </div>
 
-</span>
+                <div class="card-body">
 
-<?php else: ?>
+                    <div class="table-responsive">
 
-<span class="badge badge-success">
+                        <table class="table table-hover table-bordered datatable">
 
-PULANG
+                            <thead class="bg-primary text-white">
 
-</span>
+                                <tr>
 
-<?php endif; ?>
+                                    <th>No RM</th>
+                                    <th>Pasien</th>
+                                    <th>Dokter</th>
+                                    <th>Kamar</th>
+                                    <th>Bed</th>
+                                    <th>Status</th>
+                                    <th>Tanggal Masuk</th>
+                                    <th>Aksi</th>
 
-</td>
+                                </tr>
 
-<td>
+                            </thead>
 
-<?= date(
-'d-m-Y H:i',
-strtotime($r->tanggal_masuk)
-) ?>
+                            <tbody>
 
-</td>
+                                <?php foreach ($rawat as $r): ?>
 
-<td>
+                                    <tr>
 
-<a href="<?= base_url('rawatinap/detail/'.$r->id)?>"
-class="btn btn-info btn-sm">
+                                        <td><?= $r->no_rm ?></td>
 
-Detail
+                                        <td><?= $r->nama_pasien ?></td>
 
-</a>
+                                        <td><?= $r->nama_dokter ?></td>
 
-<?php if($r->status=='DIRAWAT'): ?>
+                                        <td><?= $r->nama_kamar ?></td>
 
-<a href="<?= base_url('rawatinap/pulang/'.$r->id)?>"
-class="btn btn-success btn-sm"
-onclick="return confirm('Pasien sudah pulang?')">
+                                        <td><?= $r->nomor_bed ?></td>
 
-Pasien Pulang
+                                        <td>
 
-</a>
+                                            <?php if ($r->status == 'DIRAWAT'): ?>
 
-<?php endif; ?>
+                                                <span class="badge badge-warning">
 
-</td>
+                                                    DIRAWAT
 
-</tr>
+                                                </span>
 
-<?php endforeach; ?>
+                                            <?php else: ?>
 
-</tbody>
+                                                <span class="badge badge-success">
 
-</table>
+                                                    PULANG
 
-</div>
+                                                </span>
 
-</div>
+                                            <?php endif; ?>
 
-</div>
+                                        </td>
+
+                                        <td>
+
+                                            <?= date(
+                                                'd-m-Y H:i',
+                                                strtotime($r->tanggal_masuk)
+                                            ) ?>
+
+                                        </td>
+
+                                        <td>
+
+                                            <a href="<?= base_url('rawatinap/detail/' . $r->id) ?>"
+                                                class="btn btn-info btn-sm">
+
+                                                Detail
+
+                                            </a>
+
+                                            <?php if ($r->status == 'DIRAWAT'): ?>
+
+                                                <a href="<?= base_url('rawatinap/pulang/' . $r->id) ?>"
+                                                    class="btn btn-success btn-sm"
+                                                    onclick="return confirm('Pasien sudah pulang?')">
+
+                                                    Pasien Pulang
+
+                                                </a>
+
+                                            <?php endif; ?>
+
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; ?>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 
 <?php $this->load->view('template/footer'); ?>
 <?php $this->load->view('template/script'); ?>
-
-<script>
-
-$(document).ready(function(){
-
-    $('#tableRawatInap').DataTable({
-
-        responsive:true
-
-    });
-
-});
-
-</script>

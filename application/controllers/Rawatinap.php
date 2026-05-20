@@ -1,14 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Rawatinap extends CI_Controller {
+class Rawatinap extends CI_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
 
         cek_login();
-       
     }
 
     /*
@@ -21,7 +21,7 @@ class Rawatinap extends CI_Controller {
     {
         $data['rawat'] = $this->db
 
-        ->select('
+            ->select('
             rawat_inap.*,
             pasien.nama_pasien,
             pasien.no_rm,
@@ -30,36 +30,36 @@ class Rawatinap extends CI_Controller {
             bed.nomor_bed
         ')
 
-        ->from('rawat_inap')
+            ->from('rawat_inap')
 
-        ->join(
-            'pasien',
-            'pasien.id_pasien=rawat_inap.pasien_id'
-        )
+            ->join(
+                'pasien',
+                'pasien.id_pasien=rawat_inap.pasien_id'
+            )
 
-        ->join(
-            'dokter',
-            'dokter.id=rawat_inap.dokter_id'
-        )
+            ->join(
+                'dokter',
+                'dokter.id=rawat_inap.dokter_id'
+            )
 
-        ->join(
-            'kamar',
-            'kamar.id=rawat_inap.kamar_id'
-        )
+            ->join(
+                'kamar',
+                'kamar.id=rawat_inap.kamar_id'
+            )
 
-        ->join(
-            'bed',
-            'bed.id=rawat_inap.bed_id'
-        )
+            ->join(
+                'bed',
+                'bed.id=rawat_inap.bed_id'
+            )
 
-        ->order_by(
-            'rawat_inap.id',
-            'DESC'
-        )
+            ->order_by(
+                'rawat_inap.id',
+                'DESC'
+            )
 
-        ->get()
+            ->get()
 
-        ->result();
+            ->result();
 
         $this->load->view(
             'rawatinap/index',
@@ -76,44 +76,72 @@ class Rawatinap extends CI_Controller {
     public function tambah()
     {
         $data['pasien'] =
-        $this->db->get('pasien')->result();
+            $this->db
+            ->order_by('nama_pasien', 'ASC')
+            ->get('pasien')
+            ->result();
 
         $data['dokter'] =
-        $this->db->get('dokter')->result();
+            $this->db
+            ->order_by('nama_dokter', 'ASC')
+            ->get('dokter')
+            ->result();
 
         $data['bed'] = $this->db
 
-        ->select('
+            ->select('
             bed.*,
             kamar.nama_kamar
         ')
 
-        ->from('bed')
+            ->from('bed')
 
-        ->join(
-            'kamar',
-            'kamar.id=bed.kamar_id'
-        )
+            ->join(
+                'kamar',
+                'kamar.id=bed.kamar_id'
+            )
 
-        ->where(
-            'bed.status',
-            'KOSONG'
-        )
+            ->where(
+                'bed.status',
+                'KOSONG'
+            )
 
-        ->get()
+            ->get()
 
-        ->result();
+            ->result();
 
-        if($this->input->post()){
+        if ($this->input->post()) {
+
+            $selected_bed_id = $this->input->post('bed_id');
+
+            if (empty($selected_bed_id)) {
+
+                $this->session->set_flashdata(
+                    'error',
+                    'Bed belum tersedia. Tambahkan data kamar dan bed terlebih dahulu.'
+                );
+
+                redirect('rawatinap/tambah');
+            }
 
             $bed = $this->db
 
-            ->get_where(
-                'bed',
-                ['id'=>$this->input->post('bed_id')]
-            )
+                ->get_where(
+                    'bed',
+                    ['id' => $selected_bed_id]
+                )
 
-            ->row();
+                ->row();
+
+            if (!$bed) {
+
+                $this->session->set_flashdata(
+                    'error',
+                    'Bed yang dipilih tidak ditemukan atau sudah tidak tersedia.'
+                );
+
+                redirect('rawatinap/tambah');
+            }
 
             $insert = [
 
@@ -123,7 +151,7 @@ class Rawatinap extends CI_Controller {
 
                 'kamar_id' => $bed->kamar_id,
 
-                'bed_id' => $this->input->post('bed_id'),
+                'bed_id' => $selected_bed_id,
 
                 'tanggal_masuk' => date('Y-m-d H:i:s'),
 
@@ -145,13 +173,18 @@ class Rawatinap extends CI_Controller {
 
             $this->db->where(
                 'id',
-                $this->input->post('bed_id')
+                $selected_bed_id
             );
 
-            $this->db->update('bed',[
+            $this->db->update('bed', [
 
-                'status'=>'TERISI'
+                'status' => 'TERISI'
             ]);
+
+            $this->session->set_flashdata(
+                'success',
+                'Data rawat inap berhasil disimpan.'
+            );
 
             redirect('rawatinap');
         }
@@ -172,16 +205,16 @@ class Rawatinap extends CI_Controller {
     {
         $rawat = $this->db
 
-        ->get_where(
-            'rawat_inap',
-            ['id'=>$id]
-        )
+            ->get_where(
+                'rawat_inap',
+                ['id' => $id]
+            )
 
-        ->row();
+            ->row();
 
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
 
-        $this->db->update('rawat_inap',[
+        $this->db->update('rawat_inap', [
 
             'tanggal_keluar' =>
             date('Y-m-d H:i:s'),
@@ -200,9 +233,9 @@ class Rawatinap extends CI_Controller {
             $rawat->bed_id
         );
 
-        $this->db->update('bed',[
+        $this->db->update('bed', [
 
-            'status'=>'KOSONG'
+            'status' => 'KOSONG'
         ]);
 
         redirect('rawatinap');
@@ -218,7 +251,7 @@ class Rawatinap extends CI_Controller {
     {
         $data['detail'] = $this->db
 
-        ->select('
+            ->select('
             rawat_inap.*,
             pasien.nama_pasien,
             pasien.no_rm,
@@ -228,36 +261,36 @@ class Rawatinap extends CI_Controller {
             bed.nomor_bed
         ')
 
-        ->from('rawat_inap')
+            ->from('rawat_inap')
 
-        ->join(
-            'pasien',
-            'pasien.id_pasien=rawat_inap.pasien_id'
-        )
+            ->join(
+                'pasien',
+                'pasien.id_pasien=rawat_inap.pasien_id'
+            )
 
-        ->join(
-            'dokter',
-            'dokter.id=rawat_inap.dokter_id'
-        )
+            ->join(
+                'dokter',
+                'dokter.id=rawat_inap.dokter_id'
+            )
 
-        ->join(
-            'kamar',
-            'kamar.id=rawat_inap.kamar_id'
-        )
+            ->join(
+                'kamar',
+                'kamar.id=rawat_inap.kamar_id'
+            )
 
-        ->join(
-            'bed',
-            'bed.id=rawat_inap.bed_id'
-        )
+            ->join(
+                'bed',
+                'bed.id=rawat_inap.bed_id'
+            )
 
-        ->where(
-            'rawat_inap.id',
-            $id
-        )
+            ->where(
+                'rawat_inap.id',
+                $id
+            )
 
-        ->get()
+            ->get()
 
-        ->row();
+            ->row();
 
         $this->load->view(
             'rawatinap/detail',

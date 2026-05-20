@@ -1,514 +1,542 @@
 <?php
 
 $role =
-$this->session->userdata('role');
+    $this->session->userdata('role');
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-<a href="<?= base_url('dashboard')?>"
-class="brand-link text-center">
+    <a href="<?= base_url('dashboard') ?>"
+        class="brand-link text-center">
 
-<span class="brand-text font-weight-light">
+        <span class="brand-text font-weight-light">
 
-<b>SIMRS</b> Klinik Rozan
+            <b>SIMRS</b> Klinik Rozan
 
-</span>
+        </span>
 
-</a>
+    </a>
 
-<div class="sidebar">
+    <div class="sidebar">
 
-<nav class="mt-3">
+        <nav class="mt-3">
 
-<ul class="nav nav-pills nav-sidebar flex-column"
-data-widget="treeview"
-role="menu"
-data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview"
+                role="menu"
+                data-accordion="false">
 
-<!-- DASHBOARD -->
+                <!-- DASHBOARD -->
 
-<li class="nav-item">
+                <li class="nav-item">
 
-<a href="<?= base_url('dashboard')?>"
-class="nav-link">
+                    <a href="<?= base_url('dashboard') ?>"
+                        class="nav-link">
 
-<i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
 
-<p>Dashboard</p>
+                        <p>Dashboard</p>
 
-</a>
+                    </a>
 
-</li>
+                </li>
 
-<!-- MASTER DATA -->
+                <!-- MASTER DATA -->
 
-<li class="nav-header">
+                <li class="nav-header">
 
-MASTER DATA
+                    MASTER DATA
 
-</li>
+                </li>
 
-<li class="nav-item has-treeview">
+                <li class="nav-item has-treeview">
 
-<a href="#"
-class="nav-link">
+                    <a href="#"
+                        class="nav-link">
 
-<i class="nav-icon fas fa-database"></i>
+                        <i class="nav-icon fas fa-database"></i>
 
-<p>
+                        <p>
 
-Master Data
+                            Master Data
 
-<i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-angle-left"></i>
 
-</p>
+                        </p>
 
-</a>
+                    </a>
 
-<ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview">
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('pasien')?>"
-class="nav-link">
+                            <a href="<?= base_url('pasien') ?>"
+                                class="nav-link">
 
-<i class="far fa-user nav-icon"></i>
+                                <i class="far fa-user nav-icon"></i>
 
-<p>Data Pasien</p>
+                                <p>Data Pasien</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('dokter')?>"
-class="nav-link">
+                            <a href="<?= base_url('dokter') ?>"
+                                class="nav-link">
 
-<i class="fas fa-user-md nav-icon"></i>
+                                <i class="fas fa-user-md nav-icon"></i>
 
-<p>Data Dokter</p>
+                                <p>Data Dokter</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('poliklinik')?>"
-class="nav-link">
+                            <a href="<?= base_url('poliklinik') ?>"
+                                class="nav-link">
 
-<i class="fas fa-hospital nav-icon"></i>
+                                <i class="fas fa-hospital nav-icon"></i>
 
-<p>Poliklinik</p>
+                                <p>Poliklinik</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('obat')?>"
-class="nav-link">
+                            <a href="<?= base_url('kamar') ?>"
+                                class="nav-link">
 
-<i class="fas fa-capsules nav-icon"></i>
+                                <i class="fas fa-door-open nav-icon"></i>
 
-<p>Master Obat</p>
+                                <p>Master Kamar</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('master_tindakan')?>"
-class="nav-link">
+                            <a href="<?= base_url('bed') ?>"
+                                class="nav-link">
 
-<i class="fas fa-stethoscope nav-icon"></i>
+                                <i class="fas fa-bed nav-icon"></i>
 
-<p>Master Tindakan</p>
+                                <p>Master Bed</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-</ul>
+                        <li class="nav-item">
 
-</li>
+                            <a href="<?= base_url('obat') ?>"
+                                class="nav-link">
 
-<!-- PENDAFTARAN -->
+                                <i class="fas fa-capsules nav-icon"></i>
 
-<li class="nav-header">
+                                <p>Master Obat</p>
 
-PENDAFTARAN
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('pendaftaran')?>"
-class="nav-link">
+                            <a href="<?= base_url('master_tindakan') ?>"
+                                class="nav-link">
 
-<i class="nav-icon fas fa-address-card"></i>
+                                <i class="fas fa-stethoscope nav-icon"></i>
 
-<p>Pendaftaran Pasien</p>
+                                <p>Master Tindakan</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li class="nav-item">
+                    </ul>
 
-<a href="<?= base_url('antrian')?>"
-class="nav-link">
+                </li>
 
-<i class="nav-icon fas fa-list-ol"></i>
+                <!-- PENDAFTARAN -->
 
-<p>Antrian Pasien</p>
+                <li class="nav-header">
 
-</a>
+                    PENDAFTARAN
 
-</li>
+                </li>
 
-<!-- PELAYANAN -->
+                <li class="nav-item">
 
-<li class="nav-header">
+                    <a href="<?= base_url('pendaftaran') ?>"
+                        class="nav-link">
 
-PELAYANAN MEDIS
+                        <i class="nav-icon fas fa-address-card"></i>
 
-</li>
+                        <p>Pendaftaran Pasien</p>
 
-<li class="nav-item has-treeview">
+                    </a>
 
-<a href="#"
-class="nav-link">
+                </li>
 
-<i class="nav-icon fas fa-procedures"></i>
+                <li class="nav-item">
 
-<p>
+                    <a href="<?= base_url('antrian') ?>"
+                        class="nav-link">
 
-Pelayanan Medis
+                        <i class="nav-icon fas fa-list-ol"></i>
 
-<i class="right fas fa-angle-left"></i>
+                        <p>Antrian Pasien</p>
 
-</p>
+                    </a>
 
-</a>
+                </li>
 
-<ul class="nav nav-treeview">
+                <!-- PELAYANAN -->
 
-<?php if(
-    in_array(
-        $role,
-        ['super_admin','admin','dokter']
-    )
-): ?>
+                <li class="nav-header">
 
-<li class="nav-item">
+                    PELAYANAN MEDIS
 
-<a href="<?= base_url('rekam_medis')?>"
-class="nav-link">
+                </li>
 
-<i class="fas fa-notes-medical nav-icon"></i>
+                <li class="nav-item has-treeview">
 
-<p>Rekam Medis</p>
+                    <a href="#"
+                        class="nav-link">
 
-</a>
+                        <i class="nav-icon fas fa-procedures"></i>
 
-</li>
+                        <p>
 
-<?php endif; ?>
+                            Pelayanan Medis
 
-<a href="<?= base_url('laboratorium')?>"
-class="nav-link">
+                            <i class="right fas fa-angle-left"></i>
 
-<i class="fas fa-vials nav-icon"></i>
+                        </p>
 
-<p>Laboratorium</p>
+                    </a>
 
-</a>
+                    <ul class="nav nav-treeview">
 
-</li>
+                        <?php if (
+                            in_array(
+                                $role,
+                                ['super_admin', 'admin', 'dokter']
+                            )
+                        ): ?>
 
-<li class="nav-item">
+                            <li class="nav-item">
 
-<a href="<?= base_url('radiologi')?>"
-class="nav-link">
+                                <a href="<?= base_url('rekam_medis') ?>"
+                                    class="nav-link">
 
-<i class="fas fa-x-ray nav-icon"></i>
+                                    <i class="fas fa-notes-medical nav-icon"></i>
 
-<p>Radiologi</p>
+                                    <p>Rekam Medis</p>
 
-</a>
+                                </a>
 
-</li>
+                            </li>
 
-<li class="nav-item">
+                        <?php endif; ?>
 
-<a href="<?= base_url('rawatinap')?>"
-class="nav-link">
+                        <li class="nav-item">
 
-<i class="fas fa-bed nav-icon"></i>
+                            <a href="<?= base_url('laboratorium') ?>"
+                                class="nav-link">
 
-<p>Rawat Inap</p>
+                                <i class="fas fa-vials nav-icon"></i>
 
-</a>
+                                <p>Laboratorium</p>
 
-</li>
+                            </a>
 
-</ul>
+                        </li>
 
-</li>
+                        <li class="nav-item">
 
-<!-- FARMASI -->
+                            <a href="<?= base_url('radiologi') ?>"
+                                class="nav-link">
 
-<li class="nav-header">
+                                <i class="fas fa-x-ray nav-icon"></i>
 
-FARMASI
+                                <p>Radiologi</p>
 
-</li>
+                            </a>
 
-<li class="nav-item has-treeview">
+                        </li>
 
-<a href="#"
-class="nav-link">
+                        <li class="nav-item">
 
-<i class="nav-icon fas fa-pills"></i>
+                            <a href="<?= base_url('rawatinap') ?>"
+                                class="nav-link">
 
-<p>
+                                <i class="fas fa-bed nav-icon"></i>
 
-Farmasi
+                                <p>Rawat Inap</p>
 
-<i class="right fas fa-angle-left"></i>
+                            </a>
 
-</p>
+                        </li>
 
-</a>
+                    </ul>
 
-<ul class="nav nav-treeview">
+                </li>
 
-<?php if(
-    in_array(
-        $role,
-        ['super_admin','admin','farmasi']
-    )
-): ?>
+                <!-- FARMASI -->
 
-<li class="nav-item">
+                <li class="nav-header">
 
-<a href="<?= base_url('farmasi')?>"
-class="nav-link">
+                    FARMASI
 
-<i class="fas fa-pills nav-icon"></i>
+                </li>
 
-<p>Farmasi</p>
+                <li class="nav-item has-treeview">
 
-</a>
+                    <a href="#"
+                        class="nav-link">
 
-</li>
+                        <i class="nav-icon fas fa-pills"></i>
 
-<?php endif; ?>
+                        <p>
 
-<li class="nav-item">
+                            Farmasi
 
-<a href="<?= base_url('resep')?>"
-class="nav-link">
+                            <i class="right fas fa-angle-left"></i>
 
-<i class="fas fa-file-medical nav-icon"></i>
+                        </p>
 
-<p>Resep Obat</p>
+                    </a>
 
-</a>
+                    <ul class="nav nav-treeview">
 
-</li>
+                        <?php if (
+                            in_array(
+                                $role,
+                                ['super_admin', 'admin', 'farmasi']
+                            )
+                        ): ?>
 
-</ul>
+                            <li class="nav-item">
 
-</li>
+                                <a href="<?= base_url('farmasi') ?>"
+                                    class="nav-link">
 
-<!-- BILLING -->
+                                    <i class="fas fa-pills nav-icon"></i>
 
-<li class="nav-header">
+                                    <p>Farmasi</p>
 
-TRANSAKSI
+                                </a>
 
-</li>
+                            </li>
 
-<?php if(
-    in_array(
-        $role,
-        ['super_admin','admin','kasir']
-    )
-): ?>
+                        <?php endif; ?>
 
-<li class="nav-item">
+                        <li class="nav-item">
 
-<a href="<?= base_url('billing')?>"
-class="nav-link">
+                            <a href="<?= base_url('resep') ?>"
+                                class="nav-link">
 
-<i class="fas fa-cash-register nav-icon"></i>
+                                <i class="fas fa-file-medical nav-icon"></i>
 
-<p>Billing</p>
+                                <p>Resep Obat</p>
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<?php endif; ?>
+                    </ul>
 
-<!-- LAPORAN -->
+                </li>
 
-<li class="nav-header">
+                <!-- BILLING -->
 
-LAPORAN
+                <li class="nav-header">
 
-</li>
+                    TRANSAKSI
 
-<li class="nav-item has-treeview">
+                </li>
 
-<a href="#"
-class="nav-link">
+                <?php if (
+                    in_array(
+                        $role,
+                        ['super_admin', 'admin', 'kasir']
+                    )
+                ): ?>
 
-<i class="nav-icon fas fa-chart-bar"></i>
+                    <li class="nav-item">
 
-<p>
+                        <a href="<?= base_url('billing') ?>"
+                            class="nav-link">
 
-Laporan
+                            <i class="fas fa-cash-register nav-icon"></i>
 
-<i class="right fas fa-angle-left"></i>
+                            <p>Billing</p>
 
-</p>
+                        </a>
 
-</a>
+                    </li>
 
-<ul class="nav nav-treeview">
+                <?php endif; ?>
 
-<li class="nav-item">
+                <!-- LAPORAN -->
 
-<a href="<?= base_url('laporan/pendapatan')?>"
-class="nav-link">
+                <li class="nav-header">
 
-<i class="far fa-circle nav-icon"></i>
+                    LAPORAN
 
-<p>Laporan Pendapatan</p>
+                </li>
 
-</a>
+                <li class="nav-item has-treeview">
 
-</li>
+                    <a href="#"
+                        class="nav-link">
 
-<li class="nav-item">
+                        <i class="nav-icon fas fa-chart-bar"></i>
 
-<a href="<?= base_url('laporan/jasa_dokter')?>"
-class="nav-link">
+                        <p>
 
-<i class="far fa-circle nav-icon"></i>
+                            Laporan
 
-<p>Jasa Dokter</p>
+                            <i class="right fas fa-angle-left"></i>
 
-</a>
+                        </p>
 
-</li>
+                    </a>
 
-</ul>
+                    <ul class="nav nav-treeview">
 
-</li>
+                        <li class="nav-item">
 
-<!-- HRD -->
+                            <a href="<?= base_url('laporan/pendapatan') ?>"
+                                class="nav-link">
 
-<li class="nav-header">
+                                <i class="far fa-circle nav-icon"></i>
 
-HRD & KEUANGAN
+                                <p>Laporan Pendapatan</p>
 
-</li>
+                            </a>
 
-<li class="nav-item">
+                        </li>
 
-<a href="<?= base_url('hrd/payroll')?>"
-class="nav-link">
+                        <li class="nav-item">
 
-<i class="nav-icon fas fa-user-tie"></i>
+                            <a href="<?= base_url('laporan/jasa_dokter') ?>"
+                                class="nav-link">
 
-<p>Payroll</p>
+                                <i class="far fa-circle nav-icon"></i>
 
-</a>
+                                <p>Jasa Dokter</p>
 
-</li>
+                            </a>
 
-<li class="nav-item">
+                        </li>
 
-<a href="<?= base_url('keuangan')?>"
-class="nav-link">
+                    </ul>
 
-<i class="nav-icon fas fa-chart-line"></i>
+                </li>
 
-<p>Keuangan</p>
+                <!-- HRD -->
 
-</a>
+                <li class="nav-header">
 
-</li>
+                    HRD & KEUANGAN
 
-<!-- PENGATURAN -->
+                </li>
 
-<li class="nav-header">
+                <li class="nav-item">
 
-PENGATURAN
+                    <a href="<?= base_url('hrd/payroll') ?>"
+                        class="nav-link">
 
-</li>
+                        <i class="nav-icon fas fa-user-tie"></i>
 
-<li class="nav-item has-treeview">
+                        <p>Payroll</p>
 
-<a href="#"
-class="nav-link">
+                    </a>
 
-<i class="nav-icon fas fa-cogs"></i>
+                </li>
 
-<p>
+                <li class="nav-item">
 
-Pengaturan
+                    <a href="<?= base_url('keuangan') ?>"
+                        class="nav-link">
 
-<i class="right fas fa-angle-left"></i>
+                        <i class="nav-icon fas fa-chart-line"></i>
 
-</p>
+                        <p>Keuangan</p>
 
-</a>
+                    </a>
 
-<ul class="nav nav-treeview">
+                </li>
 
-<li class="nav-item">
+                <!-- PENGATURAN -->
 
-<a href="<?= base_url('pengaturan')?>"
-class="nav-link">
+                <li class="nav-header">
 
-<i class="fas fa-sliders-h nav-icon"></i>
+                    PENGATURAN
 
-<p>Pengaturan Sistem</p>
+                </li>
 
-</a>
+                <li class="nav-item has-treeview">
 
-</li>
+                    <a href="#"
+                        class="nav-link">
 
-<li class="nav-item">
+                        <i class="nav-icon fas fa-cogs"></i>
 
-<a href="<?= base_url('pengaturan/backup_database')?>"
-class="nav-link">
+                        <p>
 
-<i class="fas fa-database nav-icon"></i>
+                            Pengaturan
 
-<p>Backup Database</p>
+                            <i class="right fas fa-angle-left"></i>
 
-</a>
+                        </p>
 
-</li>
+                    </a>
 
-</ul>
+                    <ul class="nav nav-treeview">
 
-</li>
+                        <li class="nav-item">
 
-</ul>
+                            <a href="<?= base_url('pengaturan') ?>"
+                                class="nav-link">
 
-</nav>
+                                <i class="fas fa-sliders-h nav-icon"></i>
 
-</div>
+                                <p>Pengaturan Sistem</p>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a href="<?= base_url('pengaturan/backup_database') ?>"
+                                class="nav-link">
+
+                                <i class="fas fa-database nav-icon"></i>
+
+                                <p>Backup Database</p>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
 
 </aside>

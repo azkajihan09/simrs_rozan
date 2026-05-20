@@ -4,189 +4,211 @@
 
 <div class="content-wrapper p-3">
 
-<div class="card card-primary">
+    <div class="card card-primary">
 
-<div class="card-header">
+        <div class="card-header">
 
-<h3 class="card-title">
+            <h3 class="card-title">
 
-Tambah Rawat Inap
+                Tambah Rawat Inap
 
-</h3>
+            </h3>
 
-</div>
+        </div>
 
-<div class="card-body">
+        <div class="card-body">
 
-<form method="POST">
+            <?php if ($this->session->flashdata('error')): ?>
 
-<input type="hidden"
+                <div class="alert alert-danger">
 
-name="<?= $this->security->get_csrf_token_name(); ?>"
+                    <?= $this->session->flashdata('error') ?>
 
-value="<?= $this->security->get_csrf_hash(); ?>">
+                </div>
 
-<div class="row">
+            <?php endif; ?>
 
-<div class="col-md-6">
+            <form method="POST">
 
-<div class="form-group">
+                <input type="hidden"
 
-<label>Pasien</label>
+                    name="<?= $this->security->get_csrf_token_name(); ?>"
 
-<select
-name="pasien_id"
-class="form-control"
-required>
+                    value="<?= $this->security->get_csrf_hash(); ?>">
 
-<option value="">
+                <div class="row">
 
--- Pilih Pasien --
+                    <div class="col-md-6">
 
-</option>
+                        <div class="form-group">
 
-<?php foreach($pasien as $p): ?>
+                            <label>Pasien</label>
 
-<option value="<?= $p->id ?>">
+                            <select
+                                name="pasien_id"
+                                class="form-control"
+                                required>
 
-<?= $p->no_rm ?>
+                                <option value="">
 
-- <?= $p->nama_pasien ?>
+                                    -- Pilih Pasien --
 
-</option>
+                                </option>
 
-<?php endforeach; ?>
+                                <?php foreach ($pasien as $p): ?>
 
-</select>
+                                    <option value="<?= $p->id_pasien ?>">
 
-</div>
+                                        <?= $p->no_rm ?>
 
-</div>
+                                        - <?= $p->nama_pasien ?>
 
-<div class="col-md-6">
+                                    </option>
 
-<div class="form-group">
+                                <?php endforeach; ?>
 
-<label>Dokter</label>
+                            </select>
 
-<select
-name="dokter_id"
-class="form-control"
-required>
+                        </div>
 
-<option value="">
+                    </div>
 
--- Pilih Dokter --
+                    <div class="col-md-6">
 
-</option>
+                        <div class="form-group">
 
-<?php foreach($dokter as $d): ?>
+                            <label>Dokter</label>
 
-<option value="<?= $d->id ?>">
+                            <select
+                                name="dokter_id"
+                                class="form-control"
+                                required>
 
-<?= $d->nama_dokter ?>
+                                <option value="">
 
-</option>
+                                    -- Pilih Dokter --
 
-<?php endforeach; ?>
+                                </option>
 
-</select>
+                                <?php foreach ($dokter as $d): ?>
 
-</div>
+                                    <option value="<?= $d->id ?>">
 
-</div>
+                                        <?= $d->nama_dokter ?>
 
-<div class="col-md-12">
+                                    </option>
 
-<div class="form-group">
+                                <?php endforeach; ?>
 
-<label>Pilih Bed</label>
+                            </select>
 
-<select
-name="bed_id"
-class="form-control"
-required>
+                        </div>
 
-<option value="">
+                    </div>
 
--- Pilih Bed --
+                    <div class="col-md-12">
 
-</option>
+                        <div class="form-group">
 
-<?php foreach($bed as $b): ?>
+                            <label>Pilih Bed</label>
 
-<option value="<?= $b->id ?>">
+                            <select
+                                name="bed_id"
+                                class="form-control"
+                                <?= empty($bed) ? 'disabled' : '' ?>
+                                required>
 
-<?= $b->nama_kamar ?>
+                                <option value="">
 
-- Bed <?= $b->nomor_bed ?>
+                                    -- Pilih Bed --
 
-</option>
+                                </option>
 
-<?php endforeach; ?>
+                                <?php foreach ($bed as $b): ?>
 
-</select>
+                                    <option value="<?= $b->id ?>">
 
-</div>
+                                        <?= $b->nama_kamar ?>
 
-</div>
+                                        - Bed <?= $b->nomor_bed ?>
 
-<div class="col-md-12">
+                                    </option>
 
-<div class="form-group">
+                                <?php endforeach; ?>
 
-<label>Diagnosa</label>
+                            </select>
 
-<textarea
-name="diagnosa"
-class="form-control"
-rows="4"
-required></textarea>
+                            <?php if (empty($bed)): ?>
 
-</div>
+                                <small class="text-danger d-block mt-2">
 
-</div>
+                                    Belum ada data kamar atau bed kosong. Isi tabel kamar dan bed terlebih dahulu.
 
-<div class="col-md-12">
+                                </small>
 
-<div class="form-group">
+                            <?php endif; ?>
 
-<label>Kondisi Pasien</label>
+                        </div>
 
-<textarea
-name="kondisi_pasien"
-class="form-control"
-rows="4"></textarea>
+                    </div>
 
-</div>
+                    <div class="col-md-12">
 
-</div>
+                        <div class="form-group">
 
-<div class="col-md-12">
+                            <label>Diagnosa</label>
 
-<button type="submit"
-class="btn btn-primary">
+                            <textarea
+                                name="diagnosa"
+                                class="form-control"
+                                rows="4"
+                                required></textarea>
 
-Simpan Rawat Inap
+                        </div>
 
-</button>
+                    </div>
 
-<a href="<?= base_url('rawatinap')?>"
-class="btn btn-secondary">
+                    <div class="col-md-12">
 
-Kembali
+                        <div class="form-group">
 
-</a>
+                            <label>Kondisi Pasien</label>
 
-</div>
+                            <textarea
+                                name="kondisi_pasien"
+                                class="form-control"
+                                rows="4"></textarea>
 
-</div>
+                        </div>
 
-</form>
+                    </div>
 
-</div>
+                    <div class="col-md-12">
 
-</div>
+                        <button type="submit"
+                            class="btn btn-primary">
+                            <?= empty($bed) ? 'disabled' : '' ?>>
+
+                            Simpan Rawat Inap
+
+                        </button>
+
+                        <a href="<?= base_url('rawatinap') ?>"
+                            class="btn btn-secondary">
+
+                            Kembali
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
 
 </div>
 

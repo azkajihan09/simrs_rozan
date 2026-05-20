@@ -1,87 +1,161 @@
-<table class="table table-bordered table-striped"
-id="tableRadiologi">
+<?php $this->load->view('template/header'); ?>
+<?php $this->load->view('template/navbar'); ?>
+<?php $this->load->view('template/sidebar'); ?>
 
-<thead>
+<?php
+$total_radiologi = is_array($radiologi) ? count($radiologi) : 0;
+$pending_radiologi = 0;
+$selesai_radiologi = 0;
 
-<tr>
+foreach ($radiologi as $item) {
+    if (strtoupper((string) $item->status) === 'SELESAI') {
+        $selesai_radiologi++;
+    } else {
+        $pending_radiologi++;
+    }
+}
+?>
 
-<th>No RM</th>
-<th>Pasien</th>
-<th>Dokter</th>
-<th>Pemeriksaan</th>
-<th>Status</th>
-<th>Aksi</th>
+<div class="content-wrapper p-3">
 
-</tr>
+    <section class="content-header">
 
-</thead>
+        <div class="container-fluid">
 
-<tbody>
+            <div class="d-flex justify-content-between align-items-center mb-3">
 
-<?php foreach($radiologi as $r): ?>
+                <h1 class="m-0">
 
-<tr>
+                    <i class="fas fa-x-ray text-primary"></i>
+                    Radiologi
 
-<td><?= $r->no_rm ?></td>
+                </h1>
 
-<td><?= $r->nama_pasien ?></td>
+                <a href="<?= base_url('radiologi/tambah') ?>"
+                    class="btn btn-primary">
 
-<td><?= $r->nama_dokter ?></td>
+                    <i class="fas fa-plus"></i>
+                    Tambah Permintaan
 
-<td><?= $r->jenis_pemeriksaan ?></td>
+                </a>
 
-<td>
+            </div>
 
-<?php if($r->status=='MENUNGGU'): ?>
+        </div>
 
-<span class="badge badge-warning">
+    </section>
 
-MENUNGGU
+    <section class="content">
 
-</span>
+        <div class="container-fluid">
 
-<?php else: ?>
+            <div class="row">
 
-<span class="badge badge-success">
+                <div class="col-md-4">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3><?= $total_radiologi ?></h3>
+                            <p>Total Permintaan Radiologi</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-x-ray"></i></div>
+                    </div>
+                </div>
 
-SELESAI
+                <div class="col-md-4">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><?= $pending_radiologi ?></h3>
+                            <p>Menunggu Hasil</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-hourglass-half"></i></div>
+                    </div>
+                </div>
 
-</span>
+                <div class="col-md-4">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3><?= $selesai_radiologi ?></h3>
+                            <p>Selesai Diproses</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                </div>
 
-<?php endif; ?>
+            </div>
 
-</td>
+            <div class="card shadow-lg border-0">
 
-<td>
+                <div class="card-header bg-gradient-primary">
+                    <h3 class="card-title text-white">Daftar Pemeriksaan Radiologi</h3>
+                </div>
 
-<a href="<?= base_url('radiologi/detail/'.$r->id)?>"
-class="btn btn-info btn-sm">
+                <div class="card-body table-responsive">
 
-Detail
+                    <table class="table table-hover table-bordered datatable">
 
-</a>
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>No</th>
+                                <th>No RM</th>
+                                <th>Pasien</th>
+                                <th>Dokter</th>
+                                <th>Pemeriksaan</th>
+                                <th>Status</th>
+                                <th width="22%">Aksi</th>
+                            </tr>
+                        </thead>
 
-<a href="<?= base_url('radiologi/hasil/'.$r->id)?>"
-class="btn btn-primary btn-sm">
+                        <tbody>
 
-Input Hasil
+                            <?php $no = 1;
+                            foreach ($radiologi as $r): ?>
 
-</a>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $r->no_rm ?></td>
+                                    <td><?= $r->nama_pasien ?></td>
+                                    <td><?= $r->nama_dokter ?></td>
+                                    <td><?= $r->jenis_pemeriksaan ?></td>
+                                    <td>
+                                        <?php if ($r->status == 'MENUNGGU'): ?>
+                                            <span class="badge badge-warning p-2">MENUNGGU</span>
+                                        <?php else: ?>
+                                            <span class="badge badge-success p-2">SELESAI</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?= base_url('radiologi/detail/' . $r->id) ?>"
+                                            class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
 
-<a href="<?= base_url('radiologi/hapus/'.$r->id)?>"
-class="btn btn-danger btn-sm"
-onclick="return confirm('Yakin hapus data?')">
+                                        <a href="<?= base_url('radiologi/hasil/' . $r->id) ?>"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-notes-medical"></i>
+                                        </a>
 
-Hapus
+                                        <a href="<?= base_url('radiologi/hapus/' . $r->id) ?>"
+                                            class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-</a>
+                            <?php endforeach; ?>
 
-</td>
+                        </tbody>
 
-</tr>
+                    </table>
 
-<?php endforeach; ?>
+                </div>
 
-</tbody>
+            </div>
 
-</table>
+        </div>
+
+    </section>
+
+</div>
+
+<?php $this->load->view('template/footer'); ?>
+<?php $this->load->view('template/script'); ?>
