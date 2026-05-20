@@ -25,10 +25,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 // Auto-detect host/scheme so localhost, subfolders, and public tunnel domains all work.
 if (PHP_SAPI === 'cli') {
-	$config['base_url'] = 'http://localhost/simrs_rozan/';
+	$config['base_url'] = 'http://localhost:8080/simrs_rozan/';
 } else {
 	$forwardedProto = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? strtolower(trim(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'])[0])) : '';
-	$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $forwardedProto === 'https';
+	$forwardedSsl = isset($_SERVER['HTTP_X_FORWARDED_SSL']) ? strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) : '';
+	$cfVisitor = isset($_SERVER['HTTP_CF_VISITOR']) ? json_decode($_SERVER['HTTP_CF_VISITOR'], TRUE) : array();
+	$cfScheme = is_array($cfVisitor) && isset($cfVisitor['scheme']) ? strtolower($cfVisitor['scheme']) : '';
+	$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+		|| $forwardedProto === 'https'
+		|| $forwardedSsl === 'on'
+		|| $cfScheme === 'https'
+		|| (isset($_SERVER['SERVER_PORT']) && (string) $_SERVER['SERVER_PORT'] === '443');
 	$scheme = $isHttps ? 'https' : 'http';
 
 	$forwardedHost = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? trim(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])[0]) : '';
